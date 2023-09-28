@@ -1,0 +1,89 @@
+*ulid.txt*  A Vim script library for ULID
+
+Author: anekos <anekos@snca.net>
+License: MIT
+Version: 1.0
+
+==============================================================================
+CONTENTS                                               *ulid-contents*
+
+    1. Introduction           |ulid-introduction|
+    2. Installation           |ulid-installation|
+    3. API                    |ulid-api|
+
+==============================================================================
+INTRODUCTION                                           *ulid-introduction*
+
+ulid is a Vim Script library for ULID (generating Universally Unique
+Lexicographically Sortable Identifiers). For more information about ULID, visit
+the official ULID specification on GitHub: https://github.com/ulid/spec
+
+==============================================================================
+INSTALLATION                                           *ulid-installation*
+
+To install ulid, use the following vim-plug command:
+
+>
+    Plug "anekos/ulid"
+<
+
+==============================================================================
+API                                                     *ulid-api*
+
+You can generate a ULID using the following command:
+
+>
+    echo ulid#generate()
+<
+
+Example:
+>
+    01HBDC1BARVN8E6NHPZYRWB6JP
+<
+
+You can also use the monotonic generator as follows:
+
+>
+    let m = ulid#monotonic()
+    echo m.generate()
+    echo m.generate()
+    echo m.generate()
+    echo m.generate()
+<
+
+Example:
+>
+    01HBDC1WX8KEVAW6XPYB6E0DC3
+    01HBDC1WX8KEVAW6XPYB6E0DC4
+    01HBDC1WX8KEVAW6XPYB6E0DC5
+    01HBDC1WX8KEVAW6XPYB6E0DC6
+<
+
+OPTIONS
+
+You can provide options to the generate function:
+
+>
+    echo ulid#generate({'time': localtime() * 1000, 'seed': srand('616')})
+    echo ulid#generate({'time': localtime() * 1000, 'seed': srand('616')})
+<
+
+Example:
+>
+    01HBDC9NY0X79TF5KQHXHBF39Z
+    01HBDC9NY0X79TF5KQHXHBF39Z
+<
+
+With the monotonic generator:
+
+>
+    let m = ulid#monotonic()
+    echo m.generate({'time': localtime() * 1000})
+    echo m.generate({'time': localtime() * 1000})
+<
+
+Example:
+>
+    01HBDCC9XGHXM0X35W885PWFXJ
+    01HBDCC9XGHXM0X35W885PWFXK
+<
